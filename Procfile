@@ -1,1 +1,1 @@
-web: gunicorn MyShoppingApp.MyShoppingApp.wsgi --log-file 
+web: gunicorn MyShoppingApp.wsgi --log-file 
