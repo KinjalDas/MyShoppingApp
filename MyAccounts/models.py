@@ -13,7 +13,7 @@ class UserProfile(models.Model):
             return value
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    mobile_no = models.PositiveIntegerField(validators = [check_phoneno])
+    mobile_no = models.IntegerField(validators = [check_phoneno])
     profile_pic = models.ImageField(upload_to='MyAccounts/profile_pics',blank=True)
 
     def __str__(self):
