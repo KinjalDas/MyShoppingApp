@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 class UserProfile(models.Model):
 
     def check_phoneno(value):
-        if len(str(value))!=10:
+        if value>9999999999 or value<1000000000:
             raise ValidationError("Enter valid mobile no. !!!")
         else:
             return value
