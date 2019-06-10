@@ -9,8 +9,6 @@ class UserProfile(models.Model):
     def check_phoneno(value):
         if value>9999999999 or value<1000000000:
             raise ValidationError("Enter valid mobile no. !!!")
-        else:
-            return value
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     mobile_no = models.IntegerField(validators = [check_phoneno])
