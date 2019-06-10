@@ -10,17 +10,19 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-def index(request):
-    return render(request,'MyAccounts/authentication_check.html')
+def index(request,registered=False,user=None):
+    return render(request,'MyAccounts/authentication_check.html',{'registered':registered,'user':user})
 
 @login_required
 def logout_user(request):
     # Log out the user.
+    print("logout eneterd")
     if (request.session.has_key('username') or request.session.has_key('password')):
         del request.session['username']
         del request.session['password']
     logout(request)
     # Return to homepage.
+    print("logout succesful")
     return render(request,'MyAccounts/authentication_check.html',{})
 
 def register_user(request):
@@ -77,7 +79,10 @@ def register_user(request):
                            'profile_form':profile_form,
                            'registered':registered})
     else:
-        return render(request,'MyAccounts/authentication_check.html',{'registered':registered,'user':user})
+        request.session['username']=user.username
+        print(user.username)
+        request.session['password']=user.password
+        return login_user(request)
 
 def login_user(request):
 
@@ -99,7 +104,7 @@ def login_user(request):
                 # In this case their homepage.
                 request.session['username']=username
                 request.session['password']=password
-                return HttpResponseRedirect(reverse('MyAccounts:authentication_check'))
+                return index(request,True,user)
             else:
                 # If account is not active:
                 return HttpResponse("Your account is not active.")
@@ -118,7 +123,7 @@ def login_user(request):
                 login(request,user)
                 # Send the user back to some page.
                 # In this case their homepage.
-                return render(request, 'MyAccounts/login_user.html', {'user':user,})
+                return index(request,True,user)
             else:
                 # If account is not active:
                 return HttpResponse("Your account is not active.")
