@@ -11,7 +11,7 @@
         Name : <a href="/details/{{ product.pid }}">{{ product.name }}</a>
         price : {{ product.price }}
         description : {{ product.desc }}
-        image : <img src="media/{{ product.image }}" alt="No image Found!" style="height:100px;width:100px;">
+        image : <img src="{{ MEDIA_URL }}/{{ product.image }}" alt="No image Found!" style="height:100px;width:100px;">
         category : {{ product.category.name }}
         <br/>
       {% endfor %}
