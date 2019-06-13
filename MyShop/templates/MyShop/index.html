@@ -5,18 +5,13 @@
     <title>WELCOME TO KINJAL-KART!</title>
   </head>
   <body>
-    {% if products %}
-      {% for product in products %}
+    {% for product in products %}
         <br/>
         Name : <a href="/details/{{ product.pid }}">{{ product.name }}</a>
         price : {{ product.price }}
-        description : {{ product.desc }}
-        image : <img src="media/{{ product.image }}" alt="No image Found!" style="height:100px;width:100px;">
+        image : <img src="{{ product.image.url }}" alt="No image Found!" style="height:100px;width:100px;">
         category : {{ product.category.name }}
         <br/>
       {% endfor %}
-    {% else %}
-      No Products to display!!!!!!!
-    {% endif %}
   </body>
 </html>

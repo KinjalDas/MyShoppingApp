@@ -5,6 +5,17 @@
     <title>Product Details</title>
   </head>
   <body>
-    pid : {{ pid }}
+    <a href="{% url 'MyShop:home' %}">HOME</a>
+    {% if product %}
+    <br/>
+    Name : <a href="/details/{{ product.pid }}">{{ product.name }}</a>
+    price : {{ product.price }}
+    description : {{ product.desc }}
+    image : <img src="{{ product.image.url }}" alt="No image Found!" style="height:100px;width:100px;">
+    category : {{ product.category.name }}
+    <br/>
+    {% else %}
+    Product Not Found !!
+    {% endif %}
   </body>
 </html>
