@@ -1,13 +1,16 @@
     {% extends 'base.html' %}
     {% block body %}
     {% if product %}
-    <br/>
-    Name : <a href="/details/{{ product.pid }}">{{ product.name }}</a>
-    price : {{ product.price }}
-    description : {{ product.desc }}
-    image : <img src="{{ product.image.url }}" alt="No image Found!" style="height:100px;width:100px;">
-    category : {{ product.category.name }}
-    <br/>
+    <div class="card" style="width: 9rem;">
+      <img src="{{ product.image.url }}" class="card-img-top" alt="No image Found!">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.desc }}</p>
+        <p class="card-text">Rs. {{ product.price }}</p>
+        <p class="card-text">Category : <a href="/category/{{ product.category.name }}">{{ product.category.name }}</a> </p>
+        <a href="#" class="btn btn-primary">Add to Cart !</a>
+      </div>
+    </div>
     {% else %}
     Product Not Found !!
     {% endif %}
