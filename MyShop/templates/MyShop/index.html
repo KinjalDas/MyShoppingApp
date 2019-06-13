@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>WELCOME TO KINJAL-KART!</title>
-  </head>
-  <body>
+  {% extends 'base.html' %}
+    {% block body %}
     {% for product in products %}
         <br/>
         Name : <a href="/details/{{ product.pid }}">{{ product.name }}</a>
@@ -13,5 +8,4 @@
         category : {{ product.category.name }}
         <br/>
       {% endfor %}
-  </body>
-</html>
+      {% endblock %}

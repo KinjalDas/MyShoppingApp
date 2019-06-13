@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Product Details</title>
-  </head>
-  <body>
-    <a href="{% url 'MyShop:home' %}">HOME</a>
+    {% extends 'base.html' %}
+    {% block body %}
     {% if product %}
     <br/>
     Name : <a href="/details/{{ product.pid }}">{{ product.name }}</a>
@@ -17,5 +11,4 @@
     {% else %}
     Product Not Found !!
     {% endif %}
-  </body>
-</html>
+    {% endblock %}
