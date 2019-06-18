@@ -1,16 +1,19 @@
   {% extends 'base.html' %}
     {% block body %}
+    <br/>
     {% for product in products %}
     <br/>
+    <div class="col-md-6 col-lg-4 col-sm-1">
     <div class="card" style="width: 9rem;">
       <img src="{{ product.image.url }}" class="card-img-top" alt="No image Found!">
       <div class="card-body">
         <h5 class="card-title"><a href="/details/{{ product.pid }}">{{ product.name }}</a></h5>
         <p class="card-text">Rs. {{ product.price }}</p>
         <p class="card-text">Category : <a href="/category/{{ product.category.name }}">{{ product.category.name }}</a> </p>
-        <a href="#" class="btn btn-primary">Add to Cart !</a>
       </div>
+    </div>
     </div>
     <br/>
     {% endfor %}
+    <br/>
     {% endblock %}

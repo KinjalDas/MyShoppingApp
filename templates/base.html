@@ -17,22 +17,45 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categories
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/category/Cars/">Cars</a>
+          <a class="dropdown-item" href="/category/Mobile/">Mobiles</a>
+        </div>
       </li>
-      
+      <li class="nav-item">
+        <a class="nav-link" href="/Cart">Go To Your Cart !</a>
+      </li>
+
     </ul>
+    {% if user.is_authenticated %}
+    <form class="form-inline my-2 my-lg-0">
+      <button class="btn btn-outline-success mr-sm-2" type="submit">Hi, {{ user.username }} !</button>
+    </form>
+    <form class="form-inline my-2 my-lg-0" action="/accounts/logout/" >
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+    </form>
+    {% else %}
     <form class="form-inline my-2 my-lg-0" action="/accounts/register/" >
       <button class="btn btn-outline-success mr-sm-2" type="submit">Register</button>
     </form>
     <form class="form-inline my-2 my-lg-0" action="/accounts/login/" >
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
     </form>
+    {% endif %}
   </div>
 </nav>
+<br/>
 <div class="container">
+  <div class="row justify-content-md-center">
+    <br/>
   {% block body %}
   {% endblock %}
+  <br/>
+</div>
 </div>
   </body>
 </html>

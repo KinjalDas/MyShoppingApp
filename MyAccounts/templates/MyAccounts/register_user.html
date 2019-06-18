@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    {% if registered %}
-        <h1>Thank you for registering!</h1>
-      {% else %}
+    {% extends 'base.html' %}
+    {% block body %}
         <h1>Register Here</h1>
+        <br/>
         <h3>Just fill out the form.</h3>
 
         <form enctype="multipart/form-data" method="POST">
@@ -17,6 +10,4 @@
           {{ profile_form.as_p }}
           <input type="submit" name="" value="Register">
         </form>
-      {% endif %}
-  </body>
-</html>
+      {% endblock %}

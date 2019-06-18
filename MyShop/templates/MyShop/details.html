@@ -7,7 +7,7 @@
         <h5 class="card-title">{{ product.name }}</h5>
         <p class="card-text">{{ product.desc }}</p>
         <p class="card-text">Rs. {{ product.price }}</p>
-        <p class="card-text">Category : <a href="/category/{{ product.category.name }}">{{ product.category.name }}</a> </p>
+        <p class="card-text">Availability: {% if product.quantity > 0 %}<span class="badge badge-success">Available !</span>{% else %}<span class="badge badge-danger">Out of Stock !!</span>{% endif %}</p>
         <a href="#" class="btn btn-primary">Add to Cart !</a>
       </div>
     </div>

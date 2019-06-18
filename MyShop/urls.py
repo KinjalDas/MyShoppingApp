@@ -9,4 +9,5 @@ app_name = 'MyShop'
 urlpatterns = [
     path('',views.home,name='home'),
     path(r'details/<int:pid>/',views.details,name='details'),
+    path(r'category/<str:Category>/',views.category,name='category'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

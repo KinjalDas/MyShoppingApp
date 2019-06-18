@@ -10,6 +10,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
+from MyShop.views import home
+
 def index(request,registered=False,user=None):
     return render(request,'MyAccounts/authentication_check.html',{'registered':registered,'user':user})
 
@@ -23,7 +25,7 @@ def logout_user(request):
     logout(request)
     # Return to homepage.
     print("logout succesful")
-    return render(request,'MyAccounts/authentication_check.html',{})
+    return home(request)
 
 def register_user(request):
 
@@ -104,7 +106,7 @@ def login_user(request):
                 # In this case their homepage.
                 request.session['username']=username
                 request.session['password']=password
-                return index(request,True,user)
+                return home(request,True,user)
             else:
                 # If account is not active:
                 return HttpResponse("Your account is not active.")
@@ -123,7 +125,7 @@ def login_user(request):
                 login(request,user)
                 # Send the user back to some page.
                 # In this case their homepage.
-                return index(request,True,user)
+                return home(request,True,user)
             else:
                 # If account is not active:
                 return HttpResponse("Your account is not active.")
