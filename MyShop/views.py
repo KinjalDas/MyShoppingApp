@@ -45,7 +45,7 @@ def category(request,Category):
 def view_cart(request):
     carts = Cart.objects.get(id = settings.CART_ID)
     prod_pairs=[]
-    if len(carts.product_set.all()) == 0:
+    if len(carts.products.all()) == 0:
         return render(request,'MyShop/cart.html',{'cart':False,})
     else:
         for cart in carts:
