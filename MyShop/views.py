@@ -4,6 +4,7 @@ from django.shortcuts import render
 from MyShop.models import *
 
 def home(request,registered=False,user=None):
+
     prod_list = Product.objects.order_by('-name')
     print(prod_list)
     return render(request,'MyShop/index.html',{'products':prod_list,'registered':registered,'user':user})
