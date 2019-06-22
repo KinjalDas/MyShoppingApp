@@ -31,9 +31,9 @@
       </li>
 
     </ul>
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated or request.session.username %}
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success mr-sm-2" type="submit">Hi, {{ user.username }} !</button>
+      <button class="btn btn-outline-success mr-sm-2" type="submit">Hi, {{ request.user.username }} !</button>
     </form>
     <form class="form-inline my-2 my-lg-0" action="/accounts/logout/" >
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
