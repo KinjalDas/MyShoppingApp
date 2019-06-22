@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+{% if cart %}
+{% for product_pair in prod_pairs %}
+Product : {{ product_pair.product.name }}
+Quanity : {{ product_pair.shop_quant }}
+{% endfor %}
+{% else %}
+No Product in Cart !!
+{% endblock %}
