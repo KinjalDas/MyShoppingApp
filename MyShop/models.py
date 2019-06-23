@@ -31,5 +31,5 @@ class ProductPair(models.Model):
 class Cart(models.Model):
     products = models.ManyToManyField(ProductPair)
 
-#class Order(models.Model):
-#    ordered_products = models.ManyToManyField(ProductPair)
+class Order(models.Model):
+    ordered_products = models.ManyToManyField(ProductPair)
