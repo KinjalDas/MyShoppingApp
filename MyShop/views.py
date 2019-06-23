@@ -89,3 +89,14 @@ def remove_from_cart(request,id):
             print(prod_pair.product.name + "removed")
             return view_cart(request)
     return view_cart(request)
+
+def update_cart(request,id):
+    check_cart(request)
+    print(request.session["cart"])
+    cart = Cart.objects.get(id = request.session["cart"])
+    if request.method == "POST":
+        for prod_pair in cart.products.all():
+            if prod_pair.product.pid == id:
+                prod_pair.shop_quant = request.POST["quantity"]
+                prod_pair.save()
+    return view_cart(request)

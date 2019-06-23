@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
   {% block body %}
-  <br/>
+  <br>
   {% if found %}
   {% for product in products %}
-  <br/>
+  <br>
   <div class="col-md-6 col-lg-4 col-sm-1">
   <div class="card" style="width: 9rem;">
     <img src="{{ product.image.url }}" class="card-img-top" alt="No image Found!">
@@ -15,8 +15,8 @@
     </div>
   </div>
   </div>
-  <br/>
+  <br>
   {% endfor %}
   {% endif %}
-  <br/>
+  <br>
   {% endblock %}
