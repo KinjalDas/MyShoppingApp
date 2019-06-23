@@ -10,9 +10,11 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from MyShop.views import home
+from MyShop.views import home,check_cart
 
 def index(request,registered=False,user=None):
+    check_cart(request)
+    print(request.session["cart"])
     return render(request,'MyAccounts/authentication_check.html',{'registered':registered,'user':user})
 
 @login_required
@@ -28,6 +30,9 @@ def logout_user(request):
     return home(request)
 
 def register_user(request):
+
+    check_cart(request)
+    print(request.session["cart"])
 
     registered = False
 
@@ -87,6 +92,9 @@ def register_user(request):
         return login_user(request)
 
 def login_user(request):
+
+    check_cart(request)
+    print(request.session["cart"])
 
     if request.method == 'POST':
         # First get the username and password supplied

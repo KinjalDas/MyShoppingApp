@@ -1,27 +1,24 @@
 from MyShop.models import *
 from django.shortcuts import render
-from django.conf import settings
-
-if settings.CART_ID == '':
-    cart = Cart()
-    cart.save()
-    settings.CART_ID = cart.id
-
-print(settings.CART_ID)
-
-
 # Create your views here.
+
+def check_cart(request):
+    if request.session.get("cart") == None:
+        cart=Cart()
+        cart.save()
+        request.session["cart"] = cart.id
 
 
 def home(request,registered=False,user=None):
-    print(settings.CART_ID)
-    cart = Cart.objects.get(id = settings.CART_ID)
-    print(cart)
+    check_cart(request)
+    print(request.session["cart"])
     prod_list = Product.objects.order_by('-name')
     print(prod_list)
     return render(request,'MyShop/index.html',{'products':prod_list,'registered':registered,'user':user})
 
 def details(request,pid):
+    check_cart(request)
+    print(request.session["cart"])
     print(pid)
     prod_list = Product.objects.all()
     found = False
@@ -33,6 +30,8 @@ def details(request,pid):
         return render(request,'MyShop/details.html',{'product':None,})
 
 def category(request,Category):
+    check_cart(request)
+    print(request.session["cart"])
     prod_list = Product.objects.all()
     found = False
     prods = []
@@ -43,7 +42,9 @@ def category(request,Category):
     return render(request,'MyShop/category.html',{'products':prods,'found':found})
 
 def view_cart(request):
-    carts = Cart.objects.get(id = settings.CART_ID)
+    check_cart(request)
+    print(request.session["cart"])
+    carts = Cart.objects.get(id = request.session["cart"])
     prod_pairs=[]
     if len(carts.products.all()) == 0:
         return render(request,'MyShop/cart.html',{'cart':False,})
