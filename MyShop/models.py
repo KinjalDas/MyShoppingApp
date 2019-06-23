@@ -33,5 +33,5 @@ class Cart(models.Model):
     products = models.ManyToManyField(ProductPair)
 
 class Order(models.Model):
-    user = models.ForeignKey(UserProfile,on_delete=models.CASCADE,default="Default")
+    user = models.ForeignKey(UserProfile,on_delete=models.CASCADE)
     ordered_products = models.ManyToManyField(ProductPair)

@@ -1,17 +1,22 @@
 from MyShop.models import *
+from MyAccounts.models import *
+from django.contrib.auth.models import User
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-from django.contrib.sessions.models import Session
-Session.objects.all().delete()
-for carts in Cart.objects.all():
-    carts.delete()
-for product_pair in ProductPair.objects.all():
-    product_pair.delete()
-
+try:
+    from django.contrib.sessions.models import Session
+    Session.objects.all().delete()
+    for carts in Cart.objects.all():
+        carts.delete()
+    for product_pair in ProductPair.objects.all():
+        product_pair.delete()
+except:
+    pass
 
 def check_cart(request):
-    if request.session.get("cart") == None:
+    if not request.session.get("cart"):
         cart=Cart()
         cart.save()
         request.session["cart"] = cart.id
@@ -99,4 +104,21 @@ def update_cart(request,id):
             if prod_pair.product.pid == id:
                 prod_pair.shop_quant = request.POST["quantity"]
                 prod_pair.save()
+    return view_cart(request)
+
+@login_required
+def checkout(request):
+    check_cart(request)
+    user = User.objects.get(username = request.session["username"])
+    print(user.username)
+    user_prof = UserProfile.objects.get(user = user)
+    print(user_prof)
+    cart = Cart.objects.get(id = request.session["cart"])
+    order = Order(user = user_prof)
+    order.save()
+    print(order)
+    for prod_pair in cart.products.all():
+        order.ordered_products.add(prod_pair)
+        cart.products.remove(prod_pair)
+        cart.save()
     return view_cart(request)
