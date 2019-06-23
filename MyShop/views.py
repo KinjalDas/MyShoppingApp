@@ -87,7 +87,5 @@ def remove_from_cart(request,id):
             print("try to remove"+ prod_pair.product.name + str(id))
             cart.products.remove(prod_pair)
             print(prod_pair.product.name + "removed")
-    #try:
+            return view_cart(request)
     return view_cart(request)
-    #except:
-    #    return view_cart(request)
