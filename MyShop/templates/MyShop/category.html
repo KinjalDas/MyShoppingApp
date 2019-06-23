@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
   {% block body %}
   <br>
+  <div class="row justify-content-md-center">
   {% if found %}
   {% for product in products %}
   <br>
@@ -14,9 +15,9 @@
       <p class="card-text">Availability: {% if product.quantity > 0 %}<span class="badge badge-success">Available !</span>{% else %}<span class="badge badge-danger">Out of Stock !!</span>{% endif %}</p>
     </div>
   </div>
-  </div>
   <br>
   {% endfor %}
   {% endif %}
+  </div>
   <br>
   {% endblock %}
