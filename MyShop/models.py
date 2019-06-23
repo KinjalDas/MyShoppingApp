@@ -22,11 +22,11 @@ class Product(models.Model):
         return self.name
 
 class ProductPair(models.Model):
-    product = models.OneToOneField(Product,on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
     shop_quant = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.product.name,self.shop_quant
+        return "{0} , {1}".format(self.product.name,self.shop_quant)
 
 class Cart(models.Model):
     products = models.ManyToManyField(ProductPair)

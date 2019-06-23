@@ -11,4 +11,5 @@ urlpatterns = [
     path(r'details/<int:pid>/',views.details,name='details'),
     path(r'category/<str:Category>/',views.category,name='category'),
     path(r'cart/',views.view_cart,name='cart'),
+    path(r'add_to_cart/<int:id>/<int:quant>/',views.add_to_cart,name='add_to_cart'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

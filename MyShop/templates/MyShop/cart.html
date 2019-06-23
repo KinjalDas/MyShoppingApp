@@ -2,10 +2,23 @@
 {% block body %}
 {% if cart %}
 {% for product_pair in prod_pairs %}
-Product : {{ product_pair.product.name }}
-Quanity : {{ product_pair.shop_quant }}
+<br/>
+<div class="col-md-6 col-lg-4 col-sm-1">
+<div class="card" style="width: 9rem;">
+  <img src="{{ product_pair.product.image.url }}" class="card-img-top" alt="No image Found!">
+  <div class="card-body">
+    <h5 class="card-title"><a href="/details/{{ product_pair.product.pid }}">{{ product_pair.product.name }}</a></h5>
+    <p class="card-text">Rs. {{ product_pair.product.price }}</p>
+    <p class="card-text">Quanity : {{ product_pair.shop_quant }}</p>
+  </div>
+</div>
+</div>
+<br/>
 {% endfor %}
 {% else %}
 No Product in Cart !!
+<br/>
 {% endif %}
+<a class ="btn btn-primary" href="/">Continue Shopping !</a>&nbsp<a class ="btn btn-primary" href="#">Checkout !</a>
+<br/>
 {% endblock %}
