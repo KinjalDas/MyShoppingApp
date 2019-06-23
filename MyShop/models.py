@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from MyAccounts.models import *
 
 # Create your models here.
 
@@ -32,4 +33,5 @@ class Cart(models.Model):
     products = models.ManyToManyField(ProductPair)
 
 class Order(models.Model):
+    user = models.ForeignKey(UserProfile,on_delete=models.CASCADE,default="Default")
     ordered_products = models.ManyToManyField(ProductPair)
