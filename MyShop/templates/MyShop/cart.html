@@ -9,7 +9,8 @@
   <div class="card-body">
     <h5 class="card-title"><a href="/details/{{ product_pair.product.pid }}">{{ product_pair.product.name }}</a></h5>
     <p class="card-text">Rs. {{ product_pair.product.price }}</p>
-    <p class="card-text">Quanity : {{ product_pair.shop_quant }}</p>
+    <p class="card-text">Quantity : {{ product_pair.shop_quant }}</p>
+    <a class="btn btn-danger" href="/remove_from_cart/{{product_pair.product.pid }}">REMOVE</a>
   </div>
 </div>
 </div>

@@ -77,3 +77,17 @@ def add_to_cart(request,id,quant):
     cart.save()
     print(cart)
     return view_cart(request)
+
+def remove_from_cart(request,id):
+    check_cart(request)
+    print(request.session["cart"])
+    cart = Cart.objects.get(id = request.session["cart"])
+    for prod_pair in cart.products.all():
+        if prod_pair.product.pid == id:
+            print("try to remove"+ prod_pair.product.name + str(id))
+            cart.products.remove(prod_pair)
+            print(prod_pair.product.name + "removed")
+    #try:
+    return view_cart(request)
+    #except:
+    #    return view_cart(request)
