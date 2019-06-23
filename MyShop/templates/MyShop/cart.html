@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block body %}
 {% if cart %}
+<div class="col-md-6 col-lg-4 col-sm-1">
 {% for product_pair in prod_pairs %}
 <br/>
-<div class="col-md-6 col-lg-4 col-sm-1">
 <div class="card" style="width: 9rem;">
   <img src="{{ product_pair.product.image.url }}" class="card-img-top" alt="No image Found!">
   <div class="card-body">
@@ -15,10 +15,11 @@
 </div>
 <br/>
 {% endfor %}
+<a class ="btn btn-success" href="#">Checkout !</a>
 {% else %}
-No Product in Cart !!
+<div class="alert alert-danger" role="alert">No Product in Cart !!</div>
 <br/>
+<div class="col-md-6 col-lg-4 col-sm-1">
 {% endif %}
-<a class ="btn btn-primary" href="/">Continue Shopping !</a>&nbsp<a class ="btn btn-primary" href="#">Checkout !</a>
-<br/>
+<a class ="btn btn-primary" href="/">Continue Shopping !</a>
 {% endblock %}
