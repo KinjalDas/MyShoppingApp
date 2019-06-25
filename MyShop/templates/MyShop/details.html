@@ -8,8 +8,10 @@
         <h5 class="card-title">{{ product.name }}</h5>
         <p class="card-text">{{ product.desc }}</p>
         <p class="card-text">Rs. {{ product.price }}</p>
-        <p class="card-text">Availability: {% if product.quantity > 0 %}<span class="badge badge-success">Available !</span>{% else %}<span class="badge badge-danger">Out of Stock !!</span>{% endif %}</p>
-        <a href="/add_to_cart/{{ product.pid }}/1" class="btn btn-primary">Add to Cart !</a>
+        <p class="card-text">Availability: {% if product.quantity > 0 %}<span class="badge badge-success">Available !</span>
+          <a href="/add_to_cart/{{ product.pid }}/1" class="btn btn-primary">Add to Cart !</a>
+          {% else %}<span class="badge badge-danger">Out of Stock !!</span></p>
+        {% endif %}
       </div>
     </div>
     {% else %}

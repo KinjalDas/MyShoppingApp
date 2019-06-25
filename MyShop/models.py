@@ -34,4 +34,8 @@ class Cart(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(UserProfile,on_delete=models.CASCADE)
-    ordered_products = models.ManyToManyField(ProductPair)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,null=True, blank=True)
+    quantity = models.PositiveIntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return "{0} , {1} ,{2}".format(self.user.user.username,self.product.name,self.quantity)

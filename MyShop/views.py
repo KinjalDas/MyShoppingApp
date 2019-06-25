@@ -3,6 +3,11 @@ from MyAccounts.models import *
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import tempfile
 # Create your views here.
 
 try:
@@ -13,7 +18,7 @@ try:
     for product_pair in ProductPair.objects.all():
         product_pair.delete()
 except:
-    pass
+     pass
 
 def check_cart(request):
     if not request.session.get("cart"):
@@ -91,6 +96,7 @@ def remove_from_cart(request,id):
         if prod_pair.product.pid == id:
             print("try to remove"+ prod_pair.product.name + str(id))
             cart.products.remove(prod_pair)
+            ProductPair.objects.filter(product = prod_pair.product).delete()
             print(prod_pair.product.name + "removed")
             return view_cart(request)
     return view_cart(request)
@@ -109,16 +115,39 @@ def update_cart(request,id):
 @login_required
 def checkout(request):
     check_cart(request)
-    user = User.objects.get(username = request.session["username"])
-    print(user.username)
-    user_prof = UserProfile.objects.get(user = user)
+    user_prof = UserProfile.objects.get(user = User.objects.get(username = request.session["username"]))
     print(user_prof)
     cart = Cart.objects.get(id = request.session["cart"])
-    order = Order(user = user_prof)
-    order.save()
-    print(order)
+    orders = []
     for prod_pair in cart.products.all():
-        order.ordered_products.add(prod_pair)
+        print(prod_pair.product , prod_pair.shop_quant)
+        order = Order(user = user_prof)
+        order.product = prod_pair.product
+        order.quantity = prod_pair.shop_quant
+        prod = Product.objects.get(pid = prod_pair.product.pid)
+        prod.quantity -= prod_pair.shop_quant
+        prod.save()
+        order.save()
+        orders.append(order)
         cart.products.remove(prod_pair)
         cart.save()
-    return view_cart(request)
+        ProductPair.objects.filter(product = prod_pair.product).delete()
+    return invoice(request,user_prof,orders)
+
+def invoice(request,user_prof,orders):
+    # Create the HttpResponse object with the appropriate PDF headers.
+    response = HttpResponse(content_type='application/pdf')
+    #response['Content-Disposition'] = 'attachment;filename="somefilename.pdf"'
+
+    # Create the PDF object, using the response object as its "file."
+    p = canvas.Canvas(response,pagesize = A4)
+
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
+    p.drawString(270,500, "Hello world.")
+    p.linkURL('/', (270,500,330,510), relative=1)
+
+    # Close the PDF object cleanly, and we're done.
+    p.showPage()
+    p.save()
+    return response
