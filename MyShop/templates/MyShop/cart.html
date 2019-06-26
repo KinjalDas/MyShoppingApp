@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="row justify-content-md-center">
+{% if cart %}
+{% for product_pair in prod_pairs %}
+<div class="col-md-6 col-lg-4 col-sm-1">
+<br>
+<div class="card" style="width: 9rem;">
+  <img src="{{ product_pair.product.image.url }}" class="card-img-top" alt="No image Found!">
+  <div class="card-body">
+    <h5 class="card-title"><a href="/details/{{ product_pair.product.pid }}">{{ product_pair.product.name }}</a></h5>
+    <p class="card-text">Rs. {{ product_pair.product.price }}</p>
+    <p class="card-text">Quantity :
+      <div class="alert alert-primary" role="alert">
+        {{ product_pair.shop_quant }}
+      </div>
+    </p>
+    <form method = "post" action = "/update_cart/{{ product_pair.product.pid }}/">
+      {% csrf_token %}
+      <select name="quantity">
+        {% for i in i|rjust:product_pair.product.quantity %}
+          <option value="{{ forloop.counter }}" {% if forloop.counter == product_pair.shop_quant %} selected {% endif %}>{{ forloop.counter }}</option>
+        {% endfor %}
+      </select>
+      <br>
+      <input type="submit" value="UPDATE" class="btn btn-primary">
+    </form>
+    <br>
+    <a class="btn btn-danger" href="/remove_from_cart/{{ product_pair.product.pid }}">REMOVE</a>
+  </div>
+  </div>
+  </div>
+{% endfor %}
+</div>
+<div style="margin-top:10px;">
+<a class ="btn btn-success" href="/checkout">Checkout !</a>
+</div>
+{% else %}
+<div class="alert alert-danger" role="alert">No Product in Cart !!</div>
+
+{% endif %}
+<br>
+<p style="display:block;">
+<a class ="btn btn-primary" href="/">Continue Shopping !</a>
+</p>
+{% endblock %}

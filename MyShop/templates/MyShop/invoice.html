@@ -1,0 +1,13 @@
+YOUR ORDER HAS BEEN PLACED!!
+
+Name : {{ user_prof.user.username }}
+
+Your Order :
+
+{% for order in orders %}
+Product : {{ order.product.name }}
+Quantity : {{ order.quantity }}
+{% endfor %}
+
+
+<a href="http://127.0.0.1:8000/" style="link:after, visited:after { content:' [' attr(href) '] '; }">HOME</a>
