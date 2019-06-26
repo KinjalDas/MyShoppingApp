@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Product Details</title>
-  </head>
-  <body>
-    pid : {{ pid }}
-  </body>
-</html>
+    {% extends 'base.html' %}
+    {% block body %}
+    <div class="row justify-content-md-center">
+    {% if product %}
+    <div class="card" style="width: 9rem;">
+      <img src="{{ product.image.url }}" class="card-img-top" alt="No image Found!">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.desc }}</p>
+        <p class="card-text">Rs. {{ product.price }}</p>
+        <p class="card-text">Availability: {% if product.quantity > 0 %}<span class="badge badge-success">Available !</span>
+          <a href="/add_to_cart/{{ product.pid }}/1" class="btn btn-primary">Add to Cart !</a>
+          {% else %}<span class="badge badge-danger">Out of Stock !!</span></p>
+        {% endif %}
+      </div>
+    </div>
+    {% else %}
+    Product Not Found !!
+    {% endif %}
+    </div>
+    {% endblock %}

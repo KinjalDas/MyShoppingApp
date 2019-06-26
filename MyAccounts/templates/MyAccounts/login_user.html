@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <form method="post" action="{% url 'MyAccounts:login_user' %}">
+        {% extends 'base.html' %}
+        {% block body %}
+    <form method="post">
           {% csrf_token %}
+
+          <div class="form-group">
           <label for="username">Username:</label>
-          <input type="text" name="username" placeholder="Username">
-
-          <label for="password"></label>
-          <input type="password" name="password">
-
-          <input type="submit" name="" value="Login">
+          <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+          <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" class="form-control" id="password" name="password">
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
 
         </form>
-  </body>
-</html>
+        {% endblock %}
