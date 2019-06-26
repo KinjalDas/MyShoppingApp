@@ -144,7 +144,7 @@ def invoice(request,user_prof,orders):
     #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
     # find the template and render it.
     template = get_template(template_path)
-    html = template.render(Context(context))
+    html = template.render(context)
 
     # create a pdf
     pisaStatus = pisa.CreatePDF(
