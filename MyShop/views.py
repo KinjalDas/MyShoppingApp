@@ -3,6 +3,7 @@ from MyAccounts.models import *
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.contrib.sessions.models import Session
 
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -13,7 +14,6 @@ from xhtml2pdf import pisa
 # Create your views here.
 
 try:
-    from django.contrib.sessions.models import Session
     Session.objects.all().delete()
     for carts in Cart.objects.all():
         carts.delete()
