@@ -1,3 +1,2 @@
-release: python manage.py makemigrations --noinput
-release: python manage.py migrate --noinput
+release: ./migrations.sh
 web: gunicorn MyShoppingApp.wsgi --log-file=-
