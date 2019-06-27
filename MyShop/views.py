@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.models import Session
-from django.db import ProgrammingError
+#from django.db.utils import ProgrammingError
 
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -14,14 +14,14 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 # Create your views here.
 
-try:
-    Session.objects.all().delete()
-    for carts in Cart.objects.all():
-        carts.delete()
-    for product_pair in ProductPair.objects.all():
-        product_pair.delete()
-except ProgrammingError:
-     print("first run")
+# try:
+#     Session.objects.all().delete()
+#     for carts in Cart.objects.all():
+#         carts.delete()
+#     for product_pair in ProductPair.objects.all():
+#         product_pair.delete()
+# except ProgrammingError:
+#      print("first run")
 
 def check_cart(request):
     if not request.session.get("cart"):
