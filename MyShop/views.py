@@ -19,8 +19,8 @@ try:
         carts.delete()
     for product_pair in ProductPair.objects.all():
         product_pair.delete()
-except:
-     pass
+except ProgrammingError:
+     print("first run")
 
 def check_cart(request):
     if not request.session.get("cart"):
