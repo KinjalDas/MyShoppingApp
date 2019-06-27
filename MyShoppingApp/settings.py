@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'MyAccounts',
     'MyShop',
-    'storages',
+    # 'storages',
 ]
 
 MIDDLEWARE = [
@@ -138,9 +138,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_URL = '/accounts/login/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-DROPBOX_APP_KEY = "3c1go567iipd9ki"
-DROPBOX_APP_SECRET_KEY = "h5omnrbhbqwtot3"
-DROPBOX_APP_ACCESS_TOKEN = DROPBOX_OAUTH2_TOKEN = "Yi_ZU-EdjpAAAAAAAAABLFNDBP0wwuB796sfQSgak6OAEdoux52Jy8479ZptL022"
-#DROPBOX_APP_ACCESS_TOKEN_SECRET = ""
-DROPBOX_ROOT_PATH = '/media/'
+# DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+# DROPBOX_APP_KEY = "3c1go567iipd9ki"
+# DROPBOX_APP_SECRET_KEY = "h5omnrbhbqwtot3"
+# DROPBOX_APP_ACCESS_TOKEN = DROPBOX_OAUTH2_TOKEN = "Yi_ZU-EdjpAAAAAAAAABLFNDBP0wwuB796sfQSgak6OAEdoux52Jy8479ZptL022"
+# #DROPBOX_APP_ACCESS_TOKEN_SECRET = ""
+# DROPBOX_ROOT_PATH = '/media/'
